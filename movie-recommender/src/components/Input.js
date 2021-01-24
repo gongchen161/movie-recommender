@@ -10,7 +10,7 @@ import Output from './Output'
 const Input = () => {
 
 
-    const ENDPOINT = "http://23.21.232.196:5000";
+    const ENDPOINT = "https://23.21.232.196:5000";
     const URL = "https://raw.githubusercontent.com/gongchen161/MovieRecommender/master/data/movies.csv";
 
     const [loading, setLoading] = useState(true);
