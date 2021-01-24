@@ -10,25 +10,27 @@ import Output from './Output'
 const Input = () => {
 
 
-    const ENDPOINT = "https://23.21.232.196:5000";
+    const ENDPOINT = "https://127.0.0.1:5000/movie/";
     const URL = "https://raw.githubusercontent.com/gongchen161/MovieRecommender/master/data/movies.csv";
 
     const [loading, setLoading] = useState(true);
     const [recommendMovies, setRecommendedMovies] = useState([]);
     const [allMovie, setAllMovie] = useState([]);
     const [analyzingMovie, setAnalyzingMovie] = useState(0)
-    const mySubmitHandler = (event, movie) => {
+    const mySubmitHandler =  (event, movie) => {
         try {
             if (!movie) {
                 return
             }
-            setAnalyzingMovie(1)
-            const socket = socketIOClient(ENDPOINT);
-            socket.emit('movie',movie.label);
-            socket.on('movie', (data) => {
-                setRecommendedMovies(JSON.parse(data))
+
+            const response = fetch(ENDPOINT+movie.label)
+            .then(response => response.json())
+            .then( data => {
+                setRecommendedMovies(data)
                 setAnalyzingMovie(2)
-            });
+            }).catch(function() {
+                setAnalyzingMovie(3)
+            })
         } catch(error) {
             setAnalyzingMovie(3)
         }
