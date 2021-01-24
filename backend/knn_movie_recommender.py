@@ -1,12 +1,13 @@
 import pandas
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
+import simplejson as json
 
 number_of_movies = 10
 
 # read data
-movies = pandas.read_csv("../data/movies.csv")
-ratings = pandas.read_csv("../data/ratings.csv")
+movies = pandas.read_csv("data/movies.csv")
+ratings = pandas.read_csv("data/ratings.csv")
 
 data_table = ratings.pivot(index='movieId',columns='userId',values='rating')
 data_table.fillna(0,inplace=True)
@@ -33,7 +34,7 @@ def knn_movie_recommendation(movie_name):
             idx = movies[movies['movieId'] == movie_id].index
             recommended_movies.append({'Title':movies.iloc[idx]['title'].values[0],'Distance':val[1]})
 
-        return ' '.join([str(elem) for elem in recommended_movies]) 
+        return json.dumps(recommended_movies)
     elif len(selected_movie) == 0:
         return "Unknown movie"
     else:
