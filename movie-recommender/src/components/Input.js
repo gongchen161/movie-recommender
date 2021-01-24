@@ -26,7 +26,7 @@ const Input = () => {
         });
     }
 
-    const url = "https://raw.githubusercontent.com/gongchen161/MovieRecommender/master/backend/data/movies.csv";
+    const url = "https://raw.githubusercontent.com/gongchen161/MovieRecommender/master/data/movies.csv";
 
     const getAllMovies = async () => {
         const response = await fetch(url)
