@@ -2,17 +2,15 @@ import './App.css';
 import React from 'react';
 import Input from './components/Input';
 
-
 function App() {
 
   
   return (
     
-    <div>
+    <div className="body-card">
       <header>
         Movie Recommendation System
       </header>
-    
       < Input />
     </div>
     

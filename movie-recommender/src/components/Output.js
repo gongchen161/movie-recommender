@@ -7,8 +7,8 @@ const Output = ({movieName}) => {
 
  
     return (
-      <div className="output">
-        <li className="output-item">{movieName}</li>
+      <div className='inner-card'>
+        <li className='fade-in'>{movieName}</li>
       </div>
     );
 }
