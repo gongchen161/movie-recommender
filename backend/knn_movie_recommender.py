@@ -6,8 +6,8 @@ import simplejson as json
 number_of_movies = 10
 
 # read data
-movies = pandas.read_csv("../data/movies.csv")
-ratings = pandas.read_csv("../data/ratings.csv")
+movies = pandas.read_csv("data/movies.csv")
+ratings = pandas.read_csv("data/ratings.csv")
 
 data_table = ratings.pivot(index='movieId',columns='userId',values='rating')
 data_table.fillna(0,inplace=True)

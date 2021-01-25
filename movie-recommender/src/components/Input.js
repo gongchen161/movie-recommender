@@ -10,8 +10,8 @@ import Output from './Output'
 const Input = () => {
 
 
-    const ENDPOINT = "https://23.21.232.196:5000/movie/";
-    const URL = "https://raw.githubusercontent.com/gongchen161/MovieRecommender/master/data/movies.csv";
+    const ENDPOINT = "https://gc-movie-recommender.herokuapp.com/movie/";
+    const URL = "https://raw.githubusercontent.com/gongchen161/MovieRecommender/master/backend/data/movies.csv";
 
     const [loading, setLoading] = useState(true);
     const [recommendMovies, setRecommendedMovies] = useState([]);
