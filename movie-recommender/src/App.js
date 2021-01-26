@@ -21,9 +21,6 @@ function App() {
         <a href="https://www.linkedin.com/in/gongchen68" title="LinkedIn" target="_blank">
             <i className="fa fa-linkedin"></i>
         </a>
-        <a href="mailto:gong.chen161@gmail.com" title="Email">
-            <i className="fa fa-envelope"></i>
-        </a>
         <p>&copy; 2021 Gong Chen</p>
         <div>Movie data info from <a href='http://files.grouplens.org/datasets/movielens/ml-latest-small-README.html' target="_blank">grouplens</a></div>
       </div>
