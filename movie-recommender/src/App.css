@@ -8,7 +8,7 @@ html {
   box-sizing: border-box;
 }
 body {
-  background-image: linear-gradient(120deg, #dbf5e3 0%, #05ee4b 100%);
+  background-image: linear-gradient(120deg, #f8f8f8 0%, #befad0 100%);
   color: white;
   font-family: "Rubik", sans-serif;
   min-height: 100vh;
@@ -20,8 +20,8 @@ header {
 .body-card {
 	background:linear-gradient(
 		to left top,
-		rgba(240, 230, 230, 0.8),
-		rgba(222, 222, 222, 0.6)
+		rgba(240, 230, 230, 0.05),
+		rgba(222, 222, 222, 0.25)
   );
   display:block;
   justify-content: center;
@@ -48,29 +48,34 @@ header {
 }
 
 .inner-card { 
-  min-width: 30%;
+  min-width: 40%;
 	display: flex;
 	background:linear-gradient(
 		to left top,
 		rgba(240, 230, 230, 0.8),
-		rgba(222, 222, 222, 0.6)
+		rgba(222, 222, 222, 0.3)
   );
-  margin-top: 5px;
+  margin-top: 10px;
   border-radius: 1rem;
   min-height: 20px;
 	box-shadow: 6px 6px 20px rgba(122,122,122,0.212);
   justify-content: center;
   align-items: center;
-  flex: 1;
+}
+
+.inner-card:hover {
+  transform: scale(1.1);
 }
 
 .fade-in {
   animation: fadeIn ease 1s;
--webkit-animation: fadeIn ease 1s;
--moz-animation: fadeIn ease 1s;
--o-animation: fadeIn ease 1s;
--ms-animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
 }
+
+
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
@@ -158,6 +163,22 @@ hr.line {
   opacity: 0.5;
 }
 
+.footer {
+  width: 80%;
+  position: fixed; 
+  bottom: 0;
+  margin: 10px;
+}
+
+.footer i {
+  color: black;
+  font-size: 30px;
+  padding-right: 10px;
+}
+
+.footer i:hover {
+  transform: scale(1.1);
+}
 select {
   -webkit-appearance: none;
   -moz-appearance: none;

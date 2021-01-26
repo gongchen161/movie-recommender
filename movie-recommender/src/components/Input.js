@@ -2,10 +2,10 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { CircularProgress, LinearProgress } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
-import socketIOClient from "socket.io-client";
+import { readString } from 'react-papaparse'
 import Output from './Output'
 const Input = () => {
 
@@ -23,7 +23,7 @@ const Input = () => {
                 return
             }
 
-            const response = fetch(ENDPOINT+movie.label)
+            fetch(ENDPOINT+movie.label)
             .then(response => response.json())
             .then( data => {
                 setRecommendedMovies(data)
@@ -39,19 +39,19 @@ const Input = () => {
    
 
     const getAllMovies = async () => {
-        const response = await fetch(URL)
+        await fetch(URL)
         .then(response => response.text())
         .then( data => {
-           const arr = data.split(/\r?\n/);
-           arr.shift();
-           arr.forEach( (e) => {
-               const strArr = e.split(',');
-               const name = strArr[1];
-    
-               if (name) {
-                  setAllMovie( old => [...old, { label : name }]);
-               }
-           });
+            const csv = readString(data)
+            const arr = csv.data;
+            arr.shift();
+            console.log(arr);
+            arr.forEach( (e) => {
+                const name = e[1];
+                if (name) {
+                    setAllMovie( old => [...old, { label : name }]);
+                }
+            });
            setLoading(false);
            
         });
@@ -61,7 +61,7 @@ const Input = () => {
     }, [])
 
     const filterOptions = createFilterOptions({
-        limit: 10,
+        limit: 30,
       });
       
     return (
@@ -79,13 +79,14 @@ const Input = () => {
                 renderInput={(params) => <TextField {...params} label="Pick a Movie" variant="outlined" />}
                 />
             </form>
-            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> </div>}
+            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Fetching recommended movies...</div>}
             { analyzingMovie === 2 && <div className="output-container">
                 <ul className="output-list">
                     {recommendMovies.map( (item) => {
                          if (item && item.Title) {
                             return <Output movieName={item.Title }></Output>
                          }
+                         return <div></div>
                     })}
                 </ul>
             </div>} 
