@@ -2,7 +2,7 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, LinearProgress } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { readString } from 'react-papaparse'
@@ -22,12 +22,13 @@ const Input = () => {
             if (!movie) {
                 return
             }
-
+            setAnalyzingMovie(1)
             fetch(ENDPOINT+movie.label)
             .then(response => response.json())
             .then( data => {
+               
                 setRecommendedMovies(data)
-                setAnalyzingMovie(2)
+                setTimeout(() => {   setAnalyzingMovie(2) }, 1000);
             }).catch(function() {
                 setAnalyzingMovie(3)
             })
@@ -38,30 +39,34 @@ const Input = () => {
 
    
 
-    const getAllMovies = async () => {
-        await fetch(URL)
+    const getAllMovies =  () => {
+
+        const lst = []
+        fetch(URL)
         .then(response => response.text())
-        .then( data => {
+        .then( async data => {
+            setLoading(true)
             const csv = readString(data)
             const arr = csv.data;
             arr.shift();
-            console.log(arr);
             arr.forEach( (e) => {
-                const name = e[1];
-                if (name) {
-                    setAllMovie( old => [...old, { label : name }]);
+                 const name = e[1];
+                 if (e[1]) {
+                     lst.push( { label : name } );
                 }
             });
-           setLoading(false);
-           
+            setAllMovie(lst);
+            setTimeout(() => { setLoading(false) }, 1500);
+        
         });
-    }
+    };
+
     useEffect( () => {
-        getAllMovies()
+     getAllMovies()
     }, [])
 
     const filterOptions = createFilterOptions({
-        limit: 30,
+        limit: 50,
       });
       
     return (
@@ -76,7 +81,7 @@ const Input = () => {
                 getOptionLabel={(option) => option.label}
                 style={{ width: 300 }}
                 onChange={mySubmitHandler}
-                renderInput={(params) => <TextField {...params} label="Pick a Movie" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} label="Pick or enter a movie" variant="outlined" />}
                 />
             </form>
             { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Fetching recommended movies...</div>}
@@ -84,7 +89,7 @@ const Input = () => {
                 <ul className="output-list">
                     {recommendMovies.map( (item) => {
                          if (item && item.Title) {
-                            return <Output movieName={item.Title }></Output>
+                            return <Output movieName={item.Title } key={item.Title}></Output>
                          }
                          return <div></div>
                     })}

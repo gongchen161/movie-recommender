@@ -21,7 +21,7 @@ function App() {
         <a href="https://www.linkedin.com/in/gongchen68" title="LinkedIn" target="_blank">
             <i className="fa fa-linkedin"></i>
         </a>
-        <p>&copy; 2021 Gong Chen</p>
+        <p>&copy; 2021 <a href="https://gongchen161.github.io/" title="Home">Gong Chen</a></p>
         <div>Movie data info from <a href='http://files.grouplens.org/datasets/movielens/ml-latest-small-README.html' target="_blank">grouplens</a></div>
       </div>
     </div>
