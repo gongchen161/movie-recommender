@@ -6,12 +6,12 @@ import { CircularProgress, LinearProgress } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { readString } from 'react-papaparse'
+import List from '@material-ui/core/List';
+import Container from '@material-ui/core/Container';
 import Output from './Output'
+import * as CONS from './Constants.js'
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 const Input = () => {
-
-
-    const ENDPOINT = "https://gc-movie-recommender.herokuapp.com/movie/";
-    const URL = "https://raw.githubusercontent.com/gongchen161/MovieRecommender/master/backend/data/movies.csv";
 
     const [loading, setLoading] = useState(true);
     const [recommendMovies, setRecommendedMovies] = useState([]);
@@ -23,7 +23,7 @@ const Input = () => {
                 return
             }
             setAnalyzingMovie(1)
-            fetch(ENDPOINT+movie.label)
+            fetch(CONS.ENDPOINT+movie.label)
             .then(response => response.json())
             .then( data => {
                
@@ -42,7 +42,7 @@ const Input = () => {
     const getAllMovies =  () => {
 
         const lst = []
-        fetch(URL)
+        fetch(CONS.URL)
         .then(response => response.text())
         .then( async data => {
             setLoading(true)
@@ -81,20 +81,25 @@ const Input = () => {
                 getOptionLabel={(option) => option.label}
                 style={{ width: 300 }}
                 onChange={mySubmitHandler}
-                renderInput={(params) => <TextField {...params} label="Pick or enter a movie" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} label="Pick a movie" variant="outlined" />}
                 />
             </form>
-            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Fetching recommended movies...</div>}
-            { analyzingMovie === 2 && <div className="output-container">
-                <ul className="output-list">
+            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Fetching recommended movies... The first fetch may take up 30 seconds</div>}
+            { analyzingMovie === 2 && <div>
+            <div className="center"> We found these movies you may like. Help us train the model by giving them a rating.</div>
+            <div className='recommend-body'>
+            <Container maxWidth="sm">
+                <List >
                     {recommendMovies.map( (item) => {
                          if (item && item.Title) {
-                            return <Output movieName={item.Title } key={item.Title}></Output>
+                            return <Output movieName={item.Title } movieId={item.Id} key={item.Title}></Output>
                          }
                          return <div></div>
                     })}
-                </ul>
-            </div>} 
+                </List>
+                </Container>
+            </div></div>}
+            { analyzingMovie === 3 && <div className="center"> <ErrorOutlineIcon/> Error. Please try again</div>} 
         </div>}
       </div>
     );

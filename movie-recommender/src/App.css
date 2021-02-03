@@ -26,7 +26,6 @@ header {
   display:block;
   justify-content: center;
 	align-items: center;
-
 	border-radius: 1rem;
 	margin: auto;
 	padding: 2rem;
@@ -34,6 +33,13 @@ header {
   width: 80%;
 	text-decoration: none;
 	color: black;
+}
+
+
+.recommend-body {
+  overflow-y: scroll;
+  top: 0;
+  height:60vh;
 }
 
 .spinner {
@@ -102,15 +108,13 @@ header {
   }
   
 .center {
-  min-height: 20vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 header,
 form {
-  min-height: 20vh;
+  min-height: 8vh;
   display: flex;
   justify-content: center;
   align-items: center;

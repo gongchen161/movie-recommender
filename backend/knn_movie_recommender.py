@@ -5,20 +5,52 @@ import simplejson as json
 
 number_of_movies = 10
 
-# read data
-movies = pandas.read_csv("data/movies.csv")
-ratings = pandas.read_csv("data/ratings.csv")
+# read initial data
+movies = None
+ratings = None
+data_table = None
+csr_data_table = None
+knn = None
 
-data_table = ratings.pivot(index='movieId',columns='userId',values='rating')
-data_table.fillna(0,inplace=True)
+COUNT = 0
 
-csr_data_table = csr_matrix(data_table.values)
-data_table.reset_index(inplace=True)
+def readData():
+    global movies
+    global ratings
+    global data_table
+    global csr_data_table
+    global knn
+    global COUNT
+    
+    print("RETRAIN MODEL")
+    movies = pandas.read_csv("data/movies.csv")
+    ratings = pandas.read_csv("data/ratings.csv")
 
-knn = NearestNeighbors(metric='cosine', algorithm='auto', n_neighbors=number_of_movies+1)
-knn.fit(csr_data_table)
+    print("NUM OF RATING: ", len(ratings))
+    data_table = ratings.pivot(index='movieId',columns='userId',values='rating')
+    data_table.fillna(0,inplace=True)
+
+    csr_data_table = csr_matrix(data_table.values)
+    data_table.reset_index(inplace=True)
+
+    knn = NearestNeighbors(metric='cosine', algorithm='auto', n_neighbors=number_of_movies+1)
+    knn.fit(csr_data_table)
 
 def knn_movie_recommendation(movie_name):
+    global movies
+    global ratings
+    global data_table
+    global csr_data_table
+    global knn
+    global COUNT
+
+    #Retrain model based on the new data every 100 times
+    print("-----", COUNT ,"------")
+    if COUNT % 100 == 0:
+        readData()
+    
+    COUNT += 1
+
     selected_movie = movies[movies['title'].str.lower() == movie_name.lower()]  
     if len(selected_movie) == 1:        
         id = selected_movie.iloc[0]['movieId']
@@ -32,11 +64,9 @@ def knn_movie_recommendation(movie_name):
         for val in result_movie_id:
             movie_id = data_table.iloc[val[0]]['movieId']
             idx = movies[movies['movieId'] == movie_id].index
-            recommended_movies.append({'Title':movies.iloc[idx]['title'].values[0],'Distance':val[1]})
+            recommended_movies.append({'Id':movie_id,'Title':movies.iloc[idx]['title'].values[0],'Distance':val[1]})
 
         return json.dumps(recommended_movies)
-    elif len(selected_movie) == 0:
-        return "Unknown movie"
     else:
-        return "Multiple moveis found. Please be more specific"
+        return "Unknown Error"
  

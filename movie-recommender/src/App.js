@@ -9,10 +9,12 @@ function App() {
   return (
     
     <div className="body-card">
+  
       <header>
         Movie Recommender
       </header>
       < Input />
+
       <div className="footer">
         <hr className="line"></hr>
         <a href="https://github.com/gongchen161" title="Github" target="_blank" >
