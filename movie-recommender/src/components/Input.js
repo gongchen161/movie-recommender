@@ -81,7 +81,7 @@ const Input = () => {
                 getOptionLabel={(option) => option.label}
                 style={{ width: 300 }}
                 onChange={mySubmitHandler}
-                renderInput={(params) => <TextField {...params} label="Pick a movie" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} label="Pick or enter a movie" variant="outlined" />}
                 />
             </form>
             { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Fetching recommended movies... The first fetch may take up 30 seconds</div>}
