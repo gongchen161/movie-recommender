@@ -14,6 +14,9 @@ import Slider from '@material-ui/core/Slider';
 import DoneIcon from '@material-ui/icons/Done';
 import { CircularProgress } from '@material-ui/core';
 import * as CONS from './Constants.js'
+import ErrorOutline from '@material-ui/icons/ErrorOutline';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Output = ({movieName, movieId}) => {
   
@@ -33,10 +36,10 @@ const Output = ({movieName, movieId}) => {
       .then( res => {
         setClicked(2)
       }).catch(function() {
-        setClicked(2)
+        setClicked(3)
       })
     } catch(error) {
-      setClicked(2)
+      setClicked(3)
     }
   }
 
@@ -92,10 +95,13 @@ const Output = ({movieName, movieId}) => {
           />
           <ListItemSecondaryAction>
             {clicked === 0 && <IconButton edge="end" aria-label="send" onClick={() => { sendMovieRating(movieId, sliderValue) }}>
+            <Tooltip title="Send rating">
               <SendIcon />
+              </Tooltip>
             </IconButton> }
             {clicked === 1 &&  <CircularProgress size={ 30 } /> }
-            {clicked === 2 &&  <DoneIcon /> }
+            {clicked === 2 &&  <DoneOutlineIcon /> }
+            {clicked === 3 &&  <ErrorOutline /> }
           </ListItemSecondaryAction>
         </ListItem>
       

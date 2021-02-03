@@ -16,7 +16,7 @@ function App() {
       < Input />
 
       <div className="footer">
-        <hr className="line"></hr>
+        
         <a href="https://github.com/gongchen161" title="Github" target="_blank" >
         <i className="fa fa-github"></i>
         </a>

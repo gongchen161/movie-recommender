@@ -84,9 +84,9 @@ const Input = () => {
                 renderInput={(params) => <TextField {...params} label="Pick or enter a movie" variant="outlined" />}
                 />
             </form>
-            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Fetching recommended movies... The first fetch may take up 30 seconds</div>}
+            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Fetching recommended movies...</div>}
             { analyzingMovie === 2 && <div>
-            <div className="center"> We found these movies you may like. Help us train the model by giving them a rating.</div>
+            <div className="center"> We think you may like these movies. Help us train the model by sending the ratings</div>
             <div className='recommend-body'>
             <Container maxWidth="sm">
                 <List >
