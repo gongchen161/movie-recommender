@@ -34,7 +34,7 @@ const Output = ({movieName, movieId}) => {
       setClicked(1)
       fetch(CONS.ENDPOINT+'add/'+CONS.ID+'/'+mid+'/'+value)
       .then( res => {
-        setClicked(2)
+        setTimeout(() => { setClicked(2) }, Math.random() * 1000);
       }).catch(function() {
         setClicked(3)
       })
