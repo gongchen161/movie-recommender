@@ -86,7 +86,7 @@ const Input = () => {
             </form>
             { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Looking for movies you may like ...</div>}
             { analyzingMovie === 2 && <div>
-            <div className="center"> We think you may like these movies. Help us improve the prediction by sending your ratings</div>
+            <div className="center"> We think you may like these movies. Help us improve the prediction by sending your ratings.</div>
             <div className='recommend-body'>
             <Container maxWidth="sm">
                 <List >
