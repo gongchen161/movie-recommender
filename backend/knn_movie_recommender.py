@@ -44,7 +44,7 @@ def knn_movie_recommendation(movie_name):
     global knn
     global COUNT
 
-    #Retrain model based on the new data every 100 times
+    #Add new training data every 100 times
     print("-----", COUNT ,"------")
     if COUNT % 100 == 0:
         readData()
@@ -56,9 +56,10 @@ def knn_movie_recommendation(movie_name):
         id = selected_movie.iloc[0]['movieId']
         data_table_id = data_table[data_table['movieId'] == id].index[0]
         
-        distances , indices = knn.kneighbors(csr_data_table[data_table_id],n_neighbors=number_of_movies+1)    
+        distances,indices = knn.kneighbors(csr_data_table[data_table_id],n_neighbors=number_of_movies+1)    
 
-        result_movie_id = sorted(list(zip(indices.squeeze().tolist(),distances.squeeze().tolist())),key=lambda x: x[1])[:0:-1]
+        result_tp = zip(indices.squeeze().tolist(),distances.squeeze().tolist())
+        result_movie_id = sorted(list(result_tp),key=lambda x: x[1])[:0:-1]
         
         recommended_movies = []
         for val in result_movie_id:

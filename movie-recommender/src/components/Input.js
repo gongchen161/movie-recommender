@@ -81,12 +81,12 @@ const Input = () => {
                 getOptionLabel={(option) => option.label}
                 style={{ width: 300 }}
                 onChange={mySubmitHandler}
-                renderInput={(params) => <TextField {...params} label="Pick or enter a movie" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} label="Enter your favorite movie" variant="outlined" />}
                 />
             </form>
             { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Looking for movies you may like ...</div>}
             { analyzingMovie === 2 && <div>
-            <div className="center"> We think you may like these movies. Help us improve the prediction by sending your ratings.</div>
+            <div className="center"> We think you will like these movies. Help us improve the prediction by sending your ratings.</div>
             <div className='recommend-body'>
             <Container maxWidth="sm">
                 <List >

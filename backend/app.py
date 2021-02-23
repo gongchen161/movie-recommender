@@ -12,7 +12,7 @@ CORS(app)
 
 @app.route('/')
 def home():
-    return '[v3.2] Hello, this is Gong Chen. Please visit https://gongchen161.github.io/MovieRecommender/ to use the movie recommender'
+    return '[v3.3] Hello, this is Gong Chen. Please visit https://gongchen161.github.io/MovieRecommender/ to use the movie recommender'
 
 @app.route('/movie/<movie>')
 @socketio.on('movie')
