@@ -32,5 +32,13 @@ def addMovie(uid, mid, rating):
 
     return "Added"
 
+@app.route('/get-all-movies')
+def getAllMovies():
+    print('get-movie-recommender: ')
+    with open('data/movies.csv') as fd:
+        return fd.read()
+        
+    return ''
+
 if __name__ == '__main__':
      app.run(threaded=True, port=5000)
