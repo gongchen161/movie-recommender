@@ -15,7 +15,7 @@ allMovies = ''
 
 @app.route('/')
 def home():
-    return '[v3.5] Hello, this is Gong Chen. Please visit https://gongchen161.github.io/MovieRecommender/ to use the movie recommender'
+    return '[v3.6] Hello, this is Gong Chen. Please visit https://gongchen161.github.io/movie-recommender/ to use the movie recommender'
 
 @app.route('/movie/<movie>')
 @socketio.on('movie')
