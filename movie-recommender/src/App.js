@@ -17,7 +17,6 @@ function App() {
 
       <div className="footer">
         <div>Movie data source: <a href='http://files.grouplens.org/datasets/movielens/ml-latest-small-README.html' target="_blank">GroupLens</a></div>
-        <p>2020-2021 <a href="https://gongchen161.github.io/" title="Home">Gong Chen</a></p>
       </div>
     </div>
     
