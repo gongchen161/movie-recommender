@@ -71,7 +71,7 @@ const Input = () => {
       
     return (
         <div>
-        { loading && <div className='center'><CircularProgress/><h2>Loading movie titles</h2></div>}
+        { loading && <div className='center'><CircularProgress/><h2>Loading movie titles ...</h2></div>}
         { !loading && <div>
             <form>
             <Autocomplete
@@ -84,7 +84,7 @@ const Input = () => {
                 renderInput={(params) => <TextField {...params} label="Enter your favorite movie" variant="outlined" />}
                 />
             </form>
-            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Looking for movies you may like</div>}
+            { analyzingMovie === 1 && <div className="center"> <CircularProgress /> Looking for movies you may like ...</div>}
             { analyzingMovie === 2 && <div>
             <div className="center"> We think you will like these movies. Help us improve the predictions by sending your ratings.</div>
             <div className='recommend-body'>
